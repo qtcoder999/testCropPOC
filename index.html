@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <style>
+    img {
+      max-width: 100%;
+    }
+  </style>
+  <meta charset="UTF-8">
+  <title>Croppie example</title>
+
+  <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="./node_modules/cropperjs/dist/cropper.min.js"></script>
+  <link href="./node_modules/cropperjs/dist/cropper.min.css" rel="stylesheet">
+  <script src="./node_modules/jquery-cropper/dist/jquery-cropper.min.js"></script>
+
+</head>
+
+<body>
+
+  <div>
+    <img id="image" src="./images/placeholder1.jpg">
+  </div>
+
+</body>
+<script>
+  var img_cropMode = true;
+  var $image = $('#image');
+  $("body").dblclick(function () {
+    console.log("double-click fired.");
+    //alert();
+    if (img_cropMode) {
+      console.log("inside if");
+      img_cropMode = false;
+
+      $image.cropper({
+        cropBoxResizable: true,
+        zoomOnWheel: false,
+
+        crop: function (event) {
+          // console.log("Width: " + event.detail.width);
+          // console.log("Height: " + event.detail.height);
+          // console.log("X: " + event.detail.x);
+          // console.log("Y: " + event.detail.y);
+          // console.log(event.detail.rotate);
+          // console.log(event.detail.scaleX);
+          // console.log(event.detail.scaleY);
+        }
+      });
+
+      // Get the Cropper.js instance after initialized
+      var cropper = $image.data('cropper');
+    }
+    else {
+      console.log("inside else");
+      img_cropMode = true;
+      $image.cropper("destroy");
+      $(".cropper-hidden").removeAttr("class");
+      $('.cropper-container').remove();
+    }
+  });
+
+
+</script>
+
+</html>
